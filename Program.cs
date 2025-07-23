@@ -1,4 +1,5 @@
-﻿using Microsoft.SemanticKernel;
+﻿// Feature branch: code changes for demonstration
+using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.AzureOpenAI;
 using ModelContextProtocol.Client;
@@ -14,9 +15,9 @@ class Program
         var builder = Kernel.CreateBuilder();
 
         builder.AddAzureOpenAIChatCompletion(
-            deploymentName: "My Azure OpenAI Deployment",
-            endpoint: "My Azure OpenAI Endpoint",
-            apiKey: "My Azure OpenAI API Key",
+            deploymentName: "sk-github-demo-deployment",
+            endpoint: "https://your-azure-openai-endpoint.openai.azure.com/",
+            apiKey: "your-azure-openai-api-key",
             serviceId: "azure-openai"
         );
 
@@ -48,7 +49,7 @@ class Program
             {
                 
                 Console.Write("Enter GitHub repository search term: ");
-                string userQuery = Console.ReadLine();
+                string userQuery = Console.ReadLine() ?? string.Empty;
                 var result = await kernel.InvokeAsync("GitHub", "search_repositories", new()
                 {
                    //["query"] = "kernel"
